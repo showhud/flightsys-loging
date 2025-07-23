@@ -615,7 +615,6 @@
         
         <div class="dashboard-content">
             <h3>主页</h3>
-            
             <div class="flights-container">
                 <!-- 航班卡片将通过JS动态生成 -->
             </div>
@@ -641,8 +640,7 @@
         const flightsContainer = document.querySelector('.flights-container'); 
         const bookFlightBtn = document.getElementById('book-flight-btn'); 
  
-        // 标签切换事件 
-        loginTab.addEventListener('click',  () => {
+         loginTab.addEventListener('click',  () => {
             loginTab.classList.add('active'); 
             registerTab.classList.remove('active'); 
             loginForm.classList.add('active'); 
@@ -716,71 +714,35 @@
             return valid;
         }
  
-    
-        // 显示用户仪表盘 
-        function showUserDashboard(username, email) {
-            authContainer.style.display  = 'none';
-            dashboard.style.display  = 'block';
-            
-            // 设置用户信息 
-            welcomeMsg.textContent  = `欢迎回来，${username}`;
-            userEmail.textContent  = email;
-            userAvatar.textContent  = username.charAt(0).toUpperCase(); 
-            
-            // 生成随机航班数据 
-            generateFlightData();
-        }
- 
-            
-            // 清空容器 
-            flightsContainer.innerHTML  = '';
-            
- 
-        // 退出登录 
-        logoutBtn.addEventListener('click',  () => {
-            dashboard.style.display  = 'none';
-            authContainer.style.display  = 'flex';
-            
-            // 清空表单 
-            document.getElementById('login-form').reset(); 
-            document.getElementById('register-form').reset(); 
-            
-            // 重置标签 
-            loginTab.click(); 
-        });
-         bookFlightBtn.addEventListener('click',  () => {
-            alert('航班上传功能正在制作~~');
-        });
- 
-        // 初始化页面 
-        document.addEventListener('DOMContentLoaded',  () => {
-            // 模拟一些社交登录按钮的功能 
-            document.querySelectorAll('.social-btn').forEach(btn  => {
-                btn.addEventListener('click',  () => {
-                    alert('社交登录功能将在未来版本中提供');
-                });
-            });
-        });
+        // 登录提交 
         loginForm.addEventListener('submit',  (e) => {
             e.preventDefault(); 
             
-            if (!validateLoginForm()) return;
+            if (validateLoginForm()) {
+                const username = document.getElementById('login-username').value.trim(); 
+                const email = username.toLowerCase()  + "@flight-sys.com"; 
+                
+                // 模拟登录成功 
+                showUserDashboard(username, email);
+                
+                // 显示成功消息 
+                alert(`登录成功！欢迎回来，${username}。`);
+            }
+        });
+ 
+        // 注册提交
+        registerForm.addEventListener('submit',  (e) => {
+            e.preventDefault(); 
             
-            const username = document.getElementById('login-username').value.trim(); 
-            const password = document.getElementById('login-password').value; 
-            
-            // 模拟登录验证 - 实际应用中应发送到服务器
-            if (username === '0000' && password === '123456') {
-                const user = {
-                    username: 共享账户,
-                    email: 'showhud@outlook.com' 
-                };
-                loginSuccess(user);
-            } else {
-                // 显示错误
-                showNotification('用户名或密码错误', true);
-                document.getElementById('login-username').parentElement.classList.add('error',  'shake');
-                document.getElementById('login-password').parentElement.classList.add('error',  'shake');
+            if (validateRegisterForm()) {
+                const username = document.getElementById('reg-username').value.trim(); 
+                const email = document.getElementById('reg-email').value.trim(); 
+                
+                // 模拟注册成功 
+                showUserDashboard(username, email);
+                
+                // 显示成功消息 
+                alert(`注册成功！欢迎加入flight sys，${username}。`);
             }
         });
     </script>
