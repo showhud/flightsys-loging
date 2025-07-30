@@ -8,6 +8,8 @@
         .login-div{
             text-align:center;
             background:blue;
+            display: flex;
+            justify-content: center;
         }
         .foot-div{
             padding-top:50px;
@@ -63,11 +65,11 @@
         function displayWeather(data) {
             const resultDiv = document.getElementById('weatherResult'); 
             resultDiv.innerHTML  = `
-                <h3>${data.airport  || '未知机场'} 实时天气</h3>
-                <p>温度: ${data.temperature}°C</p> 
-                <p>风速: ${data.windSpeed}  m/s (${data.windDirection}°)</p> 
-                <p>能见度: ${data.visibility}  km</p>
-                <p>更新时间: ${new Date(data.timestamp).toLocaleString()}</p> 
+                <h3 style="color:#ff0000;">${data.airport  || '未知机场'} 实时天气</h3>
+                <p style="color:"#ff0000;">温度: ${data.temperature}°C</p> 
+                <p style="color:"#ff0000;">风速: ${data.windSpeed}  m/s (${data.windDirection}°)</p> 
+                <p style="color:#ff0000;">能见度: ${data.visibility}  km</p>
+                <p sty;e="color:#ff0000;">更新时间: ${new Date(data.timestamp).toLocaleString()}</p> 
             `;
         }
     </script>
