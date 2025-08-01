@@ -23,56 +23,14 @@
     </style>
 </head>
 <body>
-    <div class = "login-div">
-        <h1>flight sys--登录您的账户</h1>
-        <p>登录您的账户即可使用网站内容</p>
-        <form>
-            <label for="callsign">呼号</label>
-            <input type="text" id="callsign">
-            <label for="password">密码</label>
-            <input type="password" id="password">
-            <input type="button" value = "登录">
-       </form>
-       <p>查询机场信息，报文等信息：</p>
-       <p>输入要查询的机场的四字代码</p>
-       <input type="text" id="airport">
-       <button onclick="fetchWeather()">查询</button>
+    <div class="login-div">
+        <h1>登录</h1>
+        <p>呼号</p>
+        <input type="text">
+        <p>密码</p>
+        <input type="text">
+        <input type="button" value="登录">
     </div>
-    <script>
-        async function fetchWeather() {
-            const icao = document.getElementById('airport').value.trim(); 
-            if (!icao) {
-                alert("请输入ICAO代码");
-                return;
-            }
- 
-            try {
-                const response = await fetch(`/api/realTimeMap/weather/${icao}`);
-                
-                if (!response.ok)  {
-                    throw new Error(`HTTP错误: ${response.status}`); 
-                }
- 
-                const data = await response.json(); 
-                displayWeather(data);
-            } catch (error) {
-                console.error("API 请求失败:", error);
-                document.getElementById('weatherResult').innerHTML  = 
-                    `<p style="color:red">错误: ${error.message  || "服务不可用"}</p>`;
-            }
-        }
- 
-        function displayWeather(data) {
-            const resultDiv = document.getElementById('weatherResult'); 
-            resultDiv.innerHTML  = `
-                <h3 style="color:#ff0000;">${data.airport  || '未知机场'} 实时天气</h3>
-                <p style="color:"#ff0000;">温度: ${data.temperature}°C</p> 
-                <p style="color:"#ff0000;">风速: ${data.windSpeed}  m/s (${data.windDirection}°)</p> 
-                <p style="color:#ff0000;">能见度: ${data.visibility}  km</p>
-                <p sty;e="color:#ff0000;">更新时间: ${new Date(data.timestamp).toLocaleString()}</p> 
-            `;
-        }
-    </script>
     <div class = "foot-div">
         <p>2025&copy; flight-sys开发组版权所有</p>
         <p>联系我们：</p>
